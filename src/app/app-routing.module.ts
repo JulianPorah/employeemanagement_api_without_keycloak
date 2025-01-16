@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import{EmployeeListComponent} from "./employee-list/employee-list.component";
+import{EmployeeListComponent} from "./components/employee-list/employee-list.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/employee', pathMatch: 'full' },

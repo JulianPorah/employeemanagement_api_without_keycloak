@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable, of} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Employee} from "../types";
+import {Employee} from "../../types";
 
 @Component({
   selector: 'app-employee-list',
