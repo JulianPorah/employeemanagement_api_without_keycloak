@@ -1,0 +1,54 @@
+
+<div class="container-sm popup">
+  <div class="row">
+    <div class="col">
+      <h1>Employee Detail View</h1>
+    </div>
+    <div class="col align-items-center">
+      <button class="btn btn-primary col-md-2 offset-md-10">Edit</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      ID
+      <input class="form-control mb-4" type="text" [value]="employeeId" disabled readonly>
+    </div>
+    <div class="col">
+      <!-- Empty on purpose, so the ID has some space and doesnt fill the whole row -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      Vorname
+      <input class="form-control mb-4" type="text" [value]="employeeFirstname" disabled readonly>
+    </div>
+    <div class="col">
+      Stadt
+      <input class="form-control mb-4" type="text" [value]="employeeCity" disabled readonly>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      Nachname
+      <input class="form-control mb-4" type="text" [value]="employeeLastname" disabled readonly>
+    </div>
+    <div class="col">
+      Straße
+      <input class="form-control mb-4" type="text" [value]="employeeStreet" disabled readonly>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      Telefonnummer
+      <input class="form-control mb-4" type="text" [value]="employeePhonenumber" disabled readonly>
+    </div>
+    <div class="col">
+      PLZ
+      <input class="form-control mb-4" type="text" [value]="employeePostcode" disabled readonly>
+    </div>
+  </div>
+</div>
+
+
+
+
