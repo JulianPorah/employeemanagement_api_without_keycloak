@@ -1,10 +1,10 @@
 export type Employee =  {
-  id: number|null,
-  lastName: string|null,
-  firstName: string|null,
-  street: string|null,
-  postcode: string|null,
-  city: string|null,
-  phone: string|null
+  id: number,
+  lastName: string,
+  firstName: string,
+  street: string,
+  postcode: string,
+  city: string,
+  phone: string
 }
 
