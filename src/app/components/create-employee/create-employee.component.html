@@ -1,0 +1,43 @@
+<div *ngIf="showComponent" class="container-sm popup">
+  <div>
+    <h3>Neuen Mitarbeiter Anlegen</h3>
+  </div>
+  <div class="formFormat">
+    <form (ngSubmit)="fetchCreate()" class="row g-3">
+      <div class="col-md-5 rightRowsSpace">
+        <label for="firstName" class="form-label">Vorname</label>
+        <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="firstName"  required>
+      </div>
+      <div class="col-md-5">
+        <label for="city" class="form-label">Stadt</label>
+        <input type="text" class="form-control" id="city" name="city" [(ngModel)]="city" required>
+      </div>
+      <div class="col-md-5 rightRowsSpace">
+        <label for="lastName" class="form-label">Nachname</label>
+        <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="lastName" required>
+      </div>
+      <div class="col-md-5">
+        <label for="street" class="form-label">Straße</label>
+        <input type="text" class="form-control" id="street" name="street" [(ngModel)]="street" required>
+      </div>
+      <div class="col-md-5 rightRowsSpace">
+        <label for="phone" class="form-label">Telefonnummer</label>
+        <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="phone" required>
+      </div>
+      <div class="col-md-2">
+        <label for="postcode" class="form-label">PLZ</label>
+        <input type="text" class="form-control" id="postcode" name="postcode" [(ngModel)]="postcode" required>
+      </div>
+
+
+      <div class="col-12 container-btn">
+        <button class="btn btn-primary createBtn" type="submit">Jetzt Erstellen</button>
+        <button class="btn btn-primary cancelBtn" (click)="resetFields(true)" type="submit">Abbrechen</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+abbrechen
+jetzt erstellen

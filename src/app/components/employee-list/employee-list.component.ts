@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable, of} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Employee} from "../../types";
+import {CreateEmployeeComponent} from "../create-employee/create-employee.component";
 
 @Component({
   selector: 'app-employee-list',
