@@ -1,0 +1,55 @@
+
+<div class="container-sm popup">
+  <div class="row">
+    <div class="col">
+      <h1>Mitarbeiter bearbeiten</h1>
+    </div>
+    <div class="col align-items-center">
+      <button class="btn btn-danger col-md-2 offset-md-10">Abbrechen</button>
+      <button class="btn btn-warning col-md-2 offset-md-10" (click)="updateEmployee()" >Speichern</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      ID
+      <input class="form-control mb-4" type="text" [(ngModel)]="employeeId" disabled readonly>
+    </div>
+    <div class="col">
+      <!-- Empty on purpose, so the ID has some space and doesnt fill the whole row -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      Vorname
+      <input class="form-control mb-4" type="text" [(ngModel)]="employeeFirstname">
+    </div>
+    <div class="col">
+      Stadt
+      <input class="form-control mb-4" type="text" [(ngModel)]="employeeCity">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      Nachname
+      <input class="form-control mb-4" type="text" [(ngModel)]="employeeLastname">
+    </div>
+    <div class="col">
+      Straße
+      <input class="form-control mb-4" type="text" [(ngModel)]="employeeStreet">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      Telefonnummer
+      <input class="form-control mb-4" type="text" [(ngModel)]="employeePhonenumber">
+    </div>
+    <div class="col">
+      PLZ
+      <input class="form-control mb-4" type="text" [(ngModel)]="employeePostcode">
+    </div>
+  </div>
+</div>
+
+
+
+
