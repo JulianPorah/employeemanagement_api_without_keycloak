@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Employee} from "../../types";
 
@@ -7,7 +7,7 @@ import {Employee} from "../../types";
   templateUrl: './edit-employee.component.html',
   styleUrls: ['./edit-employee.component.css']
 })
-export class EditEmployeeComponent {
+export class EditEmployeeComponent implements OnInit {
   employeeId!: number;
   employeeFirstname!: string;
   employeeLastname!: string;
@@ -16,8 +16,14 @@ export class EditEmployeeComponent {
   employeeCity!: string;
   employeePhonenumber!: string;
 
+  @Input() newId!: number;
+
   constructor(private http: HttpClient) {
-    const employee$ = this.fetchData(1);
+  }
+
+  ngOnInit(): void {
+    this.fetchData(this.newId)
+    const employee$ = this.fetchData(this.newId);
     employee$.subscribe((employee: Employee) => {
       this.employeeId = employee.id;
       this.employeeFirstname = employee.firstName;
@@ -27,11 +33,13 @@ export class EditEmployeeComponent {
       this.employeeCity = employee.city;
       this.employeePhonenumber = employee.phone;
     });
+
   }
 
   // FIXME: this is just for getting the values, into the form
   //        but I don't know how the Input() is going to work
   fetchData(id: number) {
+    console.log(this.newId)
     return this.http.get<Employee>(`backend/${id}`, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
@@ -56,11 +64,18 @@ export class EditEmployeeComponent {
         street: this.employeeStreet,
         postcode: this.employeePostcode
       },
-      { headers: headers }
-    ).subscribe((employee: Employee) => {console.log(employee)});
+      {headers: headers}
+    ).subscribe((employee: Employee) => {
+      console.log(employee)
+    });
     // TODO: idk how in the fuck observables work
     //       but WITHOUT this subscribe with the console.log in it, it wont work.
     //       Thanks JS/TS/Angular :)
+    // TIM YOU ARE THE MANNN
+    location.reload()
+  }
 
+  cancel() {
+    location.reload()
   }
 }

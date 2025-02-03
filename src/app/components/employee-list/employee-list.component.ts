@@ -19,16 +19,15 @@ import {CreateEmployeeComponent} from "../create-employee/create-employee.compon
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css']
 })
-export class EmployeeListComponent{
+export class EmployeeListComponent {
   currentValue = "Hey Guys"
   private _employees$: Observable<Employee[]>;
   showEditComponent: boolean = false;
   showDetailEmployee: boolean = false;
-  idNumberWips!:number ;
-  _assMeASD!: Employee[];
-  showModal: boolean = false;
+  showCreateNewEmployee: boolean = false;
+  idNumberWips!: number;
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient) {
     this._employees$ = of([]);
     this.fetchData();
   }
@@ -44,20 +43,26 @@ export class EmployeeListComponent{
     });
   }
 
-  disableAndEnableButton() {
-    this.showModal = !this.showModal;
-  }
-
   newnewFunction() {
-  this.showDetailEmployee = false;
+    this.showDetailEmployee = false;
   }
 
-  newFunction(id:number) {
-    this.showDetailEmployee =false;
-    setTimeout(()=>{
+  switchShowCreate() {
+    this.showCreateNewEmployee = false;
+  }
+
+  toggleFromViewToEdit(id:number) {
+    console.log(id)
+    this.idNumberWips = id;
+    this.showDetailEmployee = false;
+    this.showEditComponent = true;
+  }
+
+  newFunction(id: number) {
+    this.showDetailEmployee = false;
+    setTimeout(() => {
       this.showDetailEmployee = true;
     })
-    // I hate angular :)
     this.idNumberWips = id;
   }
 

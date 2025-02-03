@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { CreateEmployeeComponent } from './components/create-employee/create-employee.component';
 import {FormsModule} from "@angular/forms";
+import {EditEmployeeComponent} from "./components/edit-employee/edit-employee.component";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {FormsModule} from "@angular/forms";
     CreateEmployeeComponent,
     EmployeeListComponent,
     ActionButtonComponent,
+    EditEmployeeComponent,
   ],
   imports: [
     BrowserModule,

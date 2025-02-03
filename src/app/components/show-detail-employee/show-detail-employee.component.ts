@@ -20,14 +20,16 @@ export class ShowDetailEmployeeComponent {
 
   employee$!: Observable<Employee>;
 
-  @Input() newValue!: number;
+  @Input() id!: number;
   @Output() showDetailEmployee = new EventEmitter<string>();
+  @Output() toggleFromDetailToEdit = new EventEmitter<string>();
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.employee$ = this.fetchData(this.newValue)
+    console.log(this.id);
+    this.employee$ = this.fetchData(1)
     // müssen den scheiß aus dem constructor nehmen, weil es sein kann, dass wir während eine sachen aufhaben anderes öffnen können
     this.employee$.subscribe((employee: Employee) => {
       this.employeeId = employee.id;
@@ -42,8 +44,12 @@ export class ShowDetailEmployeeComponent {
 
   emitFunction(){
     this.showDetailEmployee.emit();
-
   }
+
+  toEdit() {
+    this.toggleFromDetailToEdit.emit()
+  }
+
   fetchData(id: number) {
     return this.http.get<Employee>(`backend/${id}`, {
       headers: new HttpHeaders()

@@ -10,8 +10,8 @@ import {Observable, of} from "rxjs";
 })
 export class ActionButtonComponent {
 
-  @Input() someValue!:number; // decorate the property with @Input()
-  @Output() showEditComponent = new EventEmitter<string>();
+  @Input() id!:number;
+  @Output() toggleFromDetailToEdit = new EventEmitter<string>();
 
   showModal: boolean = false;
   constructor(private http: HttpClient) {
@@ -21,15 +21,15 @@ export class ActionButtonComponent {
     this.showModal = !this.showModal;
   }
 
-  addNewItem() {
-    console.log(this.someValue)
-    this.showEditComponent.emit();
+  editEmployee() {
+    this.toggleFromDetailToEdit.emit();
   }
 
   async deleteEmployee() {
-    await fetch(`http://localhost:8089/employees/${this.someValue}`, {
+    await fetch(`http://localhost:8089/employees/${this.id}`, {
       method: "DELETE"
     })
+    //GEKAUFT
     location.reload()
   }
 }

@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {CreateEmployee, Employee} from "../../types";
+import {CreateEmployee} from "../../types";
 
 @Component({
   selector: 'app-create-employee',
@@ -10,27 +10,37 @@ import {CreateEmployee, Employee} from "../../types";
 
 export class CreateEmployeeComponent {
 
+  @Input() currentShowComponent!: boolean;
+  @Output() showCreateComponent = new EventEmitter<boolean>()
+
   firstName = '';
   lastName = '';
   phone = '';
   city = '';
   street = '';
   postcode = '';
-  showComponent = true
+
+  get buttonDisabled(): boolean {
+    return this.firstName !== "" &&
+      this.lastName !== "" &&
+      this.phone !== "" &&
+      this.city !== "" &&
+      this.street !== "" &&
+      this.postcode !== ""
+  }
 
   constructor(private http: HttpClient) {
   }
 
-  resetFields(resetShowComponent: boolean): void {
+  resetFields(): void {
     this.firstName = '';
     this.lastName = '';
     this.phone = '';
     this.city = '';
     this.street = '';
     this.postcode = '';
-    if (resetShowComponent) {
-      this.showComponent = false;
-    }
+
+    this.showCreateComponent.emit();
   }
 
   async fetchCreate() {
@@ -61,19 +71,17 @@ export class CreateEmployeeComponent {
           postcode: employee.postcode,
           skillSet: []
         },
-        { headers: headers }
+        {headers: headers}
       ).subscribe(
         response => {
           console.log('Employee created successfully', response);
-          this.resetFields(false);
         },
         error => {
           console.error('Error creating employee', error);
         }
       );
     }
-  location.reload();
-
+    location.reload();
   }
 
   checkEmployeeInputs(employeeData: CreateEmployee) {
@@ -101,9 +109,5 @@ export class CreateEmployeeComponent {
       return false;
     }
     return true;
-  }
-
-  toggleShowComponent() {
-    this.showComponent = !this.showComponent;
   }
 }
