@@ -1,10 +1,3 @@
-td{
-  font-size: 2rem;
-}
-
-.tableBodyRows:hover {
-  border: 1px solid red;
-}
 .dropdown {
   position: relative;
   display: inline-block;

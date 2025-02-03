@@ -1,8 +1,28 @@
-<h1>LF10-Starter</h1>
-<ul>
-  <li *ngFor="let e of employees$ | async">
-    {{e.lastName }}, {{e.firstName}}
-  </li>
-</ul>
+<div class="container-sm">
+  <h1>Mitarbeiter Verwaltung</h1>
+  <table class="table table-dark">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Vorname</th>
+      <th scope="col">Nachname</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="tableBodyRows" *ngFor="let item of employees$ |async">
+      <td (click)="newFunction(item.id)"> {{ item.id }}</td>
+      <td (click)="newFunction(item.id)"> {{ item.firstName }}</td>
+      <td (click)="newFunction(item.id)"> {{ item.lastName }}</td>
+      <td>
+        <app-action-button [someValue]="item.id" (showEditComponent)="switchShowEditValue()"></app-action-button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-show-detail-employee *ngIf="showDetailEmployee" [newValue]="idNumberWips"
+                          (showDetailEmployee)="newnewFunction()"></app-show-detail-employee>
 
 <app-create-employee></app-create-employee>
