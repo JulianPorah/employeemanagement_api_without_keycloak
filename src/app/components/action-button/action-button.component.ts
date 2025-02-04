@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Employee} from "../../types";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, of} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-action-button',
@@ -28,8 +26,7 @@ export class ActionButtonComponent {
   async deleteEmployee() {
     await fetch(`http://localhost:8089/employees/${this.id}`, {
       method: "DELETE"
-    })
-    //GEKAUFT
+    });
     location.reload()
   }
 }

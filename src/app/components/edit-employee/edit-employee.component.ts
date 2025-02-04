@@ -36,17 +36,13 @@ export class EditEmployeeComponent implements OnInit {
 
   }
 
-  // FIXME: this is just for getting the values, into the form
-  //        but I don't know how the Input() is going to work
   fetchData(id: number) {
-    console.log(this.newId)
+    console.log(this.newId);
     return this.http.get<Employee>(`backend/${id}`, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
     });
   }
-
-  // TODO: the cancel button is not handled
 
   updateEmployee() {
     const headers = new HttpHeaders({
@@ -68,11 +64,12 @@ export class EditEmployeeComponent implements OnInit {
     ).subscribe((employee: Employee) => {
       console.log(employee)
     });
+    location.reload()
     // TODO: idk how in the fuck observables work
     //       but WITHOUT this subscribe with the console.log in it, it wont work.
-    //       Thanks JS/TS/Angular :)
-    // TIM YOU ARE THE MANNN
-    location.reload()
+    //       Thanks JS/TS/Angular :) --Tim
+    // Julian: TIM YOU ARE THE MAN
+    // Tim: I don't know what you mean but thank you
   }
 
   cancel() {

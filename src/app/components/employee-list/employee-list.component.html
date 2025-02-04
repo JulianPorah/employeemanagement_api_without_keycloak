@@ -10,10 +10,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="tableBodyRows" *ngFor="let item of employees$ |async">
-      <td (click)="newFunction(item.id)"> {{ item.id }}</td>
-      <td (click)="newFunction(item.id)"> {{ item.firstName }}</td>
-      <td (click)="newFunction(item.id)"> {{ item.lastName }}</td>
+    <tr class="tableBodyRows" *ngFor="let item of employees$ | async">
+      <td (click)="displayEmployeeDetails(item.id)"> {{ item.id }}</td>
+      <td (click)="displayEmployeeDetails(item.id)"> {{ item.firstName }}</td>
+      <td (click)="displayEmployeeDetails(item.id)"> {{ item.lastName }}</td>
       <td>
         <app-action-button [id]="item.id" (toggleFromDetailToEdit)="toggleFromViewToEdit(item.id)"></app-action-button>
       </td>
@@ -23,9 +23,9 @@
   <button (click)="showCreateNewEmployee = true">Jetzt Erstellen</button>
 </div>
 
-<app-show-detail-employee *ngIf="showDetailEmployee" [id]="idNumberWips"
-                          (showDetailEmployee)="newnewFunction()" (toggleFromDetailToEdit)="toggleFromViewToEdit(idNumberWips)"></app-show-detail-employee>
+<app-show-detail-employee *ngIf="showDetailEmployee" [id]="employeeId"
+                          (showDetailEmployee)="hideShowDetailEmployee()" (toggleFromDetailToEdit)="toggleFromViewToEdit(employeeId)"></app-show-detail-employee>
 
-<app-create-employee *ngIf="showCreateNewEmployee" [currentShowComponent]="showCreateNewEmployee" (showCreateComponent)="switchShowCreate()"></app-create-employee>
+<app-create-employee *ngIf="showCreateNewEmployee" [currentShowComponent]="showCreateNewEmployee" (showCreateComponent)="hideCreateNewEmployee()"></app-create-employee>
 
-<app-edit-employee *ngIf="showEditComponent" [newId]="idNumberWips"> </app-edit-employee>
+<app-edit-employee *ngIf="showEditComponent" [newId]="employeeId"> </app-edit-employee>

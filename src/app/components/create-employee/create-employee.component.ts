@@ -11,7 +11,7 @@ import {CreateEmployee} from "../../types";
 export class CreateEmployeeComponent {
 
   @Input() currentShowComponent!: boolean;
-  @Output() showCreateComponent = new EventEmitter<boolean>()
+  @Output() showCreateComponent = new EventEmitter<boolean>();
 
   firstName = '';
   lastName = '';
@@ -85,7 +85,7 @@ export class CreateEmployeeComponent {
   }
 
   checkEmployeeInputs(employeeData: CreateEmployee) {
-    const phoneValidation = /^\+?[0-9]{10,}$/
+    const phoneValidation = /^\+?[0-9]{10,}$/;
 
     if (
       !employeeData.firstName ||
