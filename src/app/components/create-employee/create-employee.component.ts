@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CreateEmployee} from "../../types";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-employee',
@@ -9,9 +10,6 @@ import {CreateEmployee} from "../../types";
 })
 
 export class CreateEmployeeComponent {
-
-  @Input() currentShowComponent!: boolean;
-  @Output() showCreateComponent = new EventEmitter<boolean>();
 
   firstName = '';
   lastName = '';
@@ -29,7 +27,7 @@ export class CreateEmployeeComponent {
       this.postcode !== ""
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   resetFields(): void {
@@ -40,7 +38,11 @@ export class CreateEmployeeComponent {
     this.street = '';
     this.postcode = '';
 
-    this.showCreateComponent.emit();
+    this.changeToHomepage();
+  }
+
+  changeToHomepage() {
+    this.router.navigate(['/employees']);
   }
 
   async fetchCreate() {
@@ -81,7 +83,7 @@ export class CreateEmployeeComponent {
         }
       );
     }
-    location.reload();
+    this.resetFields()
   }
 
   checkEmployeeInputs(employeeData: CreateEmployee) {

@@ -15,3 +15,11 @@
 .dropDownButtons {
   color: black;
 }
+
+button {
+  background-color: white;
+}
+
+p:hover {
+  background-color: lightgrey;
+}

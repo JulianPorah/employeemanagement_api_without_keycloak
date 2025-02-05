@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Observable} from "rxjs";
 import {Employee} from "../../types";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-show-detail-employee',
@@ -22,10 +23,12 @@ export class ShowDetailEmployeeComponent {
   @Output() showDetailEmployee = new EventEmitter<string>();
   @Output() toggleFromDetailToEdit = new EventEmitter<string>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   ngOnInit() {
+    let stringID = this.router.url.split('/')[2]
+    this.id = parseInt(stringID)
     console.log(this.id);
     const employee$ = this.fetchData(this.id)
     // TODO: müssen den scheiß aus dem constructor nehmen, weil es sein kann, dass wir während eine sachen aufhaben anderes öffnen können
@@ -41,11 +44,11 @@ export class ShowDetailEmployeeComponent {
   }
 
   closeEmployeeDetail(){
-    this.showDetailEmployee.emit();
+    this.router.navigate(['/employees']);
   }
 
   toEdit() {
-    this.toggleFromDetailToEdit.emit()
+    this.router.navigate(['/edit', this.id]);
   }
 
   fetchData(id: number) {

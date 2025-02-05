@@ -22,3 +22,13 @@ td{
 .dropDownButtons {
   color: black;
 }
+
+.createNowBtn {
+  float: right;
+  border: none;
+  background-color: white;
+}
+
+.plusUserBtn {
+
+}
