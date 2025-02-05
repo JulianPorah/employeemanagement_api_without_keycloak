@@ -1,4 +1,11 @@
 
 .popup {
-  background-color: lightcyan;
+  background-color: #fbfbfb;
+  border-radius: 2px;
+  border: 0.5px black solid;
+}
+
+.cancelBtn {
+  border: none;
+  margin-bottom: 20px;
 }

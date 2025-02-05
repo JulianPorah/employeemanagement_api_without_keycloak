@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Observable} from "rxjs";
 import {Employee} from "../../types";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-show-detail-employee',
@@ -18,20 +19,20 @@ export class ShowDetailEmployeeComponent {
   employeeCity!: string;
   employeePhonenumber!: string;
 
-  employee$!: Observable<Employee>;
-
   @Input() id!: number;
   @Output() showDetailEmployee = new EventEmitter<string>();
   @Output() toggleFromDetailToEdit = new EventEmitter<string>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   ngOnInit() {
+    let stringID = this.router.url.split('/')[2]
+    this.id = parseInt(stringID)
     console.log(this.id);
-    this.employee$ = this.fetchData(this.id)
-    // müssen den scheiß aus dem constructor nehmen, weil es sein kann, dass wir während eine sachen aufhaben anderes öffnen können
-    this.employee$.subscribe((employee: Employee) => {
+    const employee$ = this.fetchData(this.id)
+    // TODO: müssen den scheiß aus dem constructor nehmen, weil es sein kann, dass wir während eine sachen aufhaben anderes öffnen können
+    employee$.subscribe((employee: Employee) => {
       this.employeeId = employee.id;
       this.employeeFirstname = employee.firstName;
       this.employeeLastname = employee.lastName;
@@ -42,12 +43,12 @@ export class ShowDetailEmployeeComponent {
     });
   }
 
-  emitFunction(){
-    this.showDetailEmployee.emit();
+  closeEmployeeDetail(){
+    this.router.navigate(['/employees']);
   }
 
   toEdit() {
-    this.toggleFromDetailToEdit.emit()
+    this.router.navigate(['/edit', this.id]);
   }
 
   fetchData(id: number) {

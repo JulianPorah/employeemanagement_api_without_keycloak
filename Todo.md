@@ -1,0 +1,5 @@
+- [x] Wir müssen manche funktionen umbenennen und auch Variablen
+- [ ] Es darf nicht möglich sein 2 sachen gleichzeitig aufzuhaben, also nicht einmal detail und dann edit
+  - [ ] oder auch erstellen ES DARF NICHT MÖGLICH SEIN
+- [x] Bisschen Design änderung
+- [ ] Dropdown soll bei klick außen auch schließen, maybe nicht möglich weiß nicht muss man schauen

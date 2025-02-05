@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Employee} from "../../types";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-employee',
@@ -18,10 +19,12 @@ export class EditEmployeeComponent implements OnInit {
 
   @Input() newId!: number;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   ngOnInit(): void {
+    let stringID = this.router.url.split('/')[2]
+    this.newId = parseInt(stringID)
     this.fetchData(this.newId)
     const employee$ = this.fetchData(this.newId);
     employee$.subscribe((employee: Employee) => {
@@ -36,17 +39,13 @@ export class EditEmployeeComponent implements OnInit {
 
   }
 
-  // FIXME: this is just for getting the values, into the form
-  //        but I don't know how the Input() is going to work
   fetchData(id: number) {
-    console.log(this.newId)
+    console.log(this.newId);
     return this.http.get<Employee>(`backend/${id}`, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
     });
   }
-
-  // TODO: the cancel button is not handled
 
   updateEmployee() {
     const headers = new HttpHeaders({
@@ -70,12 +69,13 @@ export class EditEmployeeComponent implements OnInit {
     });
     // TODO: idk how in the fuck observables work
     //       but WITHOUT this subscribe with the console.log in it, it wont work.
-    //       Thanks JS/TS/Angular :)
-    // TIM YOU ARE THE MANNN
-    location.reload()
+    //       Thanks JS/TS/Angular :) --Tim
+    // Julian: TIM YOU ARE THE MAN
+    // Tim: I don't know what you mean but thank you
+    this.router.navigate(['/employees']);
   }
 
   cancel() {
-    location.reload()
+    this.router.navigate(['/employees']);
   }
 }
