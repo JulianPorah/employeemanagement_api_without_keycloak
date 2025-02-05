@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Employee} from "../../types";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-employee-list',
@@ -12,7 +13,7 @@ export class EmployeeListComponent {
   private _employees$: Observable<Employee[]>;
   showEditComponent: boolean = false;
   showDetailEmployee: boolean = false;
-  showCreateNewEmployee: boolean = false;
+
   /**
    * This is used to transfer the id to the other components
    *
@@ -20,7 +21,7 @@ export class EmployeeListComponent {
    */
   employeeId!: number;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this._employees$ = of([]);
     this.fetchData();
   }
@@ -32,12 +33,12 @@ export class EmployeeListComponent {
     });
   }
 
-  hideShowDetailEmployee() {
-    this.showDetailEmployee = false;
+  showCreateNewEmployee() {
+    this.router.navigate(['/create']);
   }
 
-  hideCreateNewEmployee() {
-    this.showCreateNewEmployee = false;
+  hideShowDetailEmployee() {
+    this.showDetailEmployee = false;
   }
 
   toggleFromViewToEdit(id:number) {
@@ -47,14 +48,14 @@ export class EmployeeListComponent {
   }
 
   displayEmployeeDetails(id: number) {
-    this.showDetailEmployee = false;
-    setTimeout(() => {
-      this.showDetailEmployee = true;
-    });
-    this.employeeId = id;
+    this.router.navigate(['/show', id]);
   }
 
   get employees$(): Observable<Employee[]> {
     return this._employees$;
+  }
+
+  ngAfterViewInit(): void {
+    this.fetchData()
   }
 }

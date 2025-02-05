@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Employee} from "../../types";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-employee',
@@ -18,10 +19,12 @@ export class EditEmployeeComponent implements OnInit {
 
   @Input() newId!: number;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   ngOnInit(): void {
+    let stringID = this.router.url.split('/')[2]
+    this.newId = parseInt(stringID)
     this.fetchData(this.newId)
     const employee$ = this.fetchData(this.newId);
     employee$.subscribe((employee: Employee) => {
@@ -64,15 +67,15 @@ export class EditEmployeeComponent implements OnInit {
     ).subscribe((employee: Employee) => {
       console.log(employee)
     });
-    location.reload()
     // TODO: idk how in the fuck observables work
     //       but WITHOUT this subscribe with the console.log in it, it wont work.
     //       Thanks JS/TS/Angular :) --Tim
     // Julian: TIM YOU ARE THE MAN
     // Tim: I don't know what you mean but thank you
+    this.router.navigate(['/employees']);
   }
 
   cancel() {
-    location.reload()
+    this.router.navigate(['/employees']);
   }
 }
