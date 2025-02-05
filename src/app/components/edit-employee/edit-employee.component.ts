@@ -62,8 +62,7 @@ export class EditEmployeeComponent implements OnInit {
         postcode: this.employeePostcode
       },
       {headers: headers}
-    ).subscribe((employee: Employee) => {
-      console.log(employee)
+    ).subscribe(() => {
       this.router.navigate(['/employees']);
     });
   }
