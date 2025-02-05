@@ -3,7 +3,7 @@ td{
 }
 
 .tableBodyRows:hover {
-  border: 1px solid red;
+  border: 2px solid gray;
 }
 .dropdown {
   position: relative;
