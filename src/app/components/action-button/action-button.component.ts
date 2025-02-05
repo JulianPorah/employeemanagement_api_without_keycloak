@@ -10,7 +10,6 @@ import {Router} from "@angular/router";
 export class ActionButtonComponent {
 
   @Input() id!:number;
-  @Output() toggleFromDetailToEdit = new EventEmitter<string>();
 
   showModal: boolean = false;
   constructor(private http: HttpClient, private router: Router) {
@@ -25,9 +24,11 @@ export class ActionButtonComponent {
   }
 
   async deleteEmployee() {
-    await fetch(`http://localhost:8089/employees/${this.id}`, {
-      method: "DELETE"
-    });
-    location.reload()
+    this.http.delete(`/backend/${this.id}`)
+      .subscribe(() => {
+          console.log("deleted");
+          location.reload();
+        }
+      )
   }
 }

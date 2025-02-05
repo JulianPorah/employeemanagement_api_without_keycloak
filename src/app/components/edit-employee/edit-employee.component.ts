@@ -17,7 +17,7 @@ export class EditEmployeeComponent implements OnInit {
   employeeCity!: string;
   employeePhonenumber!: string;
 
-  @Input() newId!: number;
+  newId!: number;
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -40,7 +40,6 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   fetchData(id: number) {
-    console.log(this.newId);
     return this.http.get<Employee>(`backend/${id}`, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
@@ -52,7 +51,6 @@ export class EditEmployeeComponent implements OnInit {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     });
-
 
     this.http.put<Employee>(`backend/${this.employeeId}`,
       {
@@ -66,13 +64,8 @@ export class EditEmployeeComponent implements OnInit {
       {headers: headers}
     ).subscribe((employee: Employee) => {
       console.log(employee)
+      this.router.navigate(['/employees']);
     });
-    // TODO: idk how in the fuck observables work
-    //       but WITHOUT this subscribe with the console.log in it, it wont work.
-    //       Thanks JS/TS/Angular :) --Tim
-    // Julian: TIM YOU ARE THE MAN
-    // Tim: I don't know what you mean but thank you
-    this.router.navigate(['/employees']);
   }
 
   cancel() {

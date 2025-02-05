@@ -77,13 +77,13 @@ export class CreateEmployeeComponent {
       ).subscribe(
         response => {
           console.log('Employee created successfully', response);
+          this.resetFields();
         },
         error => {
-          console.error('Error creating employee', error);
+          alert(`Error creating employee. Internal Server Error`);
         }
       );
     }
-    this.resetFields()
   }
 
   checkEmployeeInputs(employeeData: CreateEmployee) {
@@ -98,16 +98,19 @@ export class CreateEmployeeComponent {
       !employeeData.postcode
     ) {
       console.error('Error in creating employee, All fields are required');
+      alert('Error in creating employee, All fields are required');
       return false;
     }
 
     if (!phoneValidation.test(employeeData.phone)) {
       console.error('Invalid phone format');
+      alert('Invalid phone format');
       return false;
     }
 
     if (employeeData.postcode.length != 5) {
       console.error('Invalid postcode format');
+      alert('Invalid postcode format');
       return false;
     }
     return true;

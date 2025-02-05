@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs";
 import {Employee} from "../../types";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   standalone: true,
   styleUrls: ['./show-detail-employee.component.css']
 })
-export class ShowDetailEmployeeComponent {
+export class ShowDetailEmployeeComponent implements OnInit {
   employeeId!: number;
   employeeFirstname!: string;
   employeeLastname!: string;
@@ -19,9 +19,7 @@ export class ShowDetailEmployeeComponent {
   employeeCity!: string;
   employeePhonenumber!: string;
 
-  @Input() id!: number;
-  @Output() showDetailEmployee = new EventEmitter<string>();
-  @Output() toggleFromDetailToEdit = new EventEmitter<string>();
+  id!: number;
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -29,9 +27,7 @@ export class ShowDetailEmployeeComponent {
   ngOnInit() {
     let stringID = this.router.url.split('/')[2]
     this.id = parseInt(stringID)
-    console.log(this.id);
     const employee$ = this.fetchData(this.id)
-    // TODO: müssen den scheiß aus dem constructor nehmen, weil es sein kann, dass wir während eine sachen aufhaben anderes öffnen können
     employee$.subscribe((employee: Employee) => {
       this.employeeId = employee.id;
       this.employeeFirstname = employee.firstName;

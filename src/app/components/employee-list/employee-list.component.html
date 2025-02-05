@@ -15,7 +15,7 @@
       <td (click)="displayEmployeeDetails(item.id)"> {{ item.firstName }}</td>
       <td (click)="displayEmployeeDetails(item.id)"> {{ item.lastName }}</td>
       <td>
-        <app-action-button [id]="item.id" (toggleFromDetailToEdit)="toggleFromViewToEdit(item.id)"></app-action-button>
+        <app-action-button [id]="item.id"></app-action-button>
       </td>
     </tr>
     </tbody>
@@ -28,8 +28,3 @@
   </button>
 </div>
 
-<app-show-detail-employee *ngIf="showDetailEmployee" [id]="employeeId"
-                          (showDetailEmployee)="hideShowDetailEmployee()" (toggleFromDetailToEdit)="toggleFromViewToEdit(employeeId)"></app-show-detail-employee>
-
-
-<app-edit-employee *ngIf="showEditComponent" [newId]="employeeId"> </app-edit-employee>
